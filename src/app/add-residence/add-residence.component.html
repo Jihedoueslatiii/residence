@@ -1,0 +1,43 @@
+<div class="add-residence-form">
+  <h2>Add New Residence</h2>
+  <form [formGroup]="addResidenceForm" (ngSubmit)="onSubmit()">
+    <div>
+      <label for="name">Residence Name</label>
+      <input type="text" id="name" formControlName="name" placeholder="Enter residence name">
+      <div *ngIf="addResidenceForm.get('name')?.invalid && addResidenceForm.get('name')?.touched">
+        <small *ngIf="addResidenceForm.get('name')?.errors?.['required']">Name is required.</small>
+        <small *ngIf="addResidenceForm.get('name')?.errors?.['minlength']">Name must be at least 3 characters.</small>
+      </div>
+    </div>
+
+    <div>
+      <label for="address">Address</label>
+      <input type="text" id="address" formControlName="address" placeholder="Enter address">
+      <div *ngIf="addResidenceForm.get('address')?.invalid && addResidenceForm.get('address')?.touched">
+        <small *ngIf="addResidenceForm.get('address')?.errors?.['required']">Address is required.</small>
+        <small *ngIf="addResidenceForm.get('address')?.errors?.['minlength']">Address must be at least 5 characters.</small>
+      </div>
+    </div>
+
+    <div>
+      <label for="status">Status</label>
+      <select id="status" formControlName="status">
+        <option value="Disponible">Disponible</option>
+        <option value="En Construction">En Construction</option>
+        <option value="Vendu">Vendu</option>
+      </select>
+    </div>
+
+    <div>
+      <label for="image">Image</label>
+      <input type="file" id="image" (change)="onFileSelected($event)" accept="image/*">
+    </div>
+
+    <div *ngIf="imagePreview">
+      <h3>Image Preview:</h3>
+      <img [src]="imagePreview" alt="Image Preview" style="max-width: 200px; max-height: 200px;">
+    </div>
+
+    <button type="submit" [disabled]="addResidenceForm.invalid">Add Residence</button>
+  </form>
+</div>

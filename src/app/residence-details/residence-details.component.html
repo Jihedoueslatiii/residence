@@ -1,0 +1,15 @@
+<div *ngIf="residence; else loading">
+  <h2>{{ residence.name }}</h2>
+  <p><strong>Address:</strong> {{ residence.address }}</p>
+  <p><strong>Status:</strong> {{ residence.status }}</p>
+  <img [src]="residence.image" alt="{{ residence.name }}" class="image">
+</div>
+
+<ng-template #loading>
+  <p>Loading residence details...</p>
+</ng-template>
+
+<!-- Show a message if the residence is not found -->
+<div *ngIf="notFound">
+  <p>Residence not found.</p>
+</div>
