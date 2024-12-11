@@ -1,0 +1,37 @@
+{
+  "residences": [
+    {
+      "id": "1",
+      "name": "Residence A",
+      "address": "123 Main St",
+      "status": "Available",
+      "image": "url_to_image"
+    },
+    {
+      "id": "2",
+      "name": "Residence B",
+      "address": "456 Elm St",
+      "status": "Under Construction",
+      "image": "url_to_image"
+    },
+    {
+      "id": "3",
+      "name": "Residence C",
+      "address": "789 Oak St",
+      "status": "Sold",
+      "image": "url_to_image"
+    },
+    {
+      "id": "46f2",
+      "name": "Premium Plan",
+      "address": "aa",
+      "status": "En Construction"
+    },
+    {
+      "id": "707a",
+      "name": "Nassim",
+      "address": "15 mahmoud taimour , hammam chatt",
+      "status": "En Construction"
+    }
+  ]
+}

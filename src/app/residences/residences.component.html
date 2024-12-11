@@ -11,12 +11,16 @@
   </div>
 
   <h2 class="text-2xl font-bold mb-4">Liste des Résidences</h2>
-  
-  <button routerLink="/add-residence" class="add-button bg-blue-500 text-white py-2 px-4 rounded-md mb-4 hover:bg-blue-600 transition-colors">
+
+  <button
+    routerLink="/add-residence"
+    class="add-button bg-blue-500 text-white py-2 px-4 rounded-md mb-4 hover:bg-blue-600 transition-colors"
+  >
     Ajouter une Résidence
   </button>
 
-  <div class="residences-list grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+  <!-- Residences List -->
+  <div *ngIf="filteredResidences.length > 0; else noResidences" class="residences-list grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
     <div *ngFor="let residence of filteredResidences" class="residence-card border rounded-lg overflow-hidden shadow-lg">
       <div class="residence-image">
         <img [src]="residence.image" alt="{{ residence.name }}" class="w-full h-48 object-cover" />
@@ -30,21 +34,35 @@
             <span *ngSwitchCase="'Vendu'" class="status sold text-red-500">❌ Vendu</span>
           </ng-container>
         </p>
-        
+
         <div class="flex space-x-2">
-          <button (click)="showLocation(residence)" class="location-button bg-green-500 text-white py-1 px-4 rounded-md hover:bg-green-600 transition-colors">
+          <button
+            (click)="showLocation(residence)"
+            class="location-button bg-green-500 text-white py-1 px-4 rounded-md hover:bg-green-600 transition-colors"
+          >
             Voir l'Adresse
           </button>
-          <button (click)="addToFavorites(residence)" class="like-button bg-yellow-500 text-white py-1 px-4 rounded-md hover:bg-yellow-600 transition-colors">
+          <button
+            (click)="addToFavorites(residence)"
+            class="like-button bg-yellow-500 text-white py-1 px-4 rounded-md hover:bg-yellow-600 transition-colors"
+          >
             Ajouter aux favoris
           </button>
-          <button [routerLink]="['/residences', residence.id]" class="details-button bg-blue-500 text-white py-1 px-4 rounded-md hover:bg-blue-600 transition-colors">
+          <button
+            [routerLink]="['/residences', residence.id]"
+            class="details-button bg-blue-500 text-white py-1 px-4 rounded-md hover:bg-blue-600 transition-colors"
+          >
             Voir les détails
           </button>
         </div>
       </div>
     </div>
   </div>
+
+  <!-- No Residences Found -->
+  <ng-template #noResidences>
+    <p class="text-center text-gray-500">Aucune résidence trouvée.</p>
+  </ng-template>
 
   <!-- Favorites List -->
   <h2 class="text-2xl font-bold mt-8 mb-4">Résidences Favoris</h2>

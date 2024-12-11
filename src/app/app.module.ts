@@ -10,6 +10,8 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { AddResidenceComponent } from './add-residence/add-residence.component';
 import { RouterModule } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http'; // Import HttpClientModule
+
 
 @NgModule({
   declarations: [
@@ -25,7 +27,9 @@ import { RouterModule } from '@angular/router';
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule ,
-    RouterModule
+    RouterModule,
+    HttpClientModule,// Enable HTTP client
+
   ],
   providers: [],
   bootstrap: [AppComponent]

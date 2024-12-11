@@ -1,43 +1,62 @@
-<div class="add-residence-form">
-  <h2>Add New Residence</h2>
-  <form [formGroup]="addResidenceForm" (ngSubmit)="onSubmit()">
+<div class="container mx-auto p-8 bg-gradient-to-r from-blue-100 to-blue-50 shadow-lg rounded-lg">
+  <h2 class="text-4xl font-semibold mb-8 text-blue-700 text-center">Ajouter une Résidence</h2>
+
+  <form [formGroup]="addResidenceForm" (ngSubmit)="onSubmit()" class="space-y-8">
+    <!-- Name Field -->
     <div>
-      <label for="name">Residence Name</label>
-      <input type="text" id="name" formControlName="name" placeholder="Enter residence name">
-      <div *ngIf="addResidenceForm.get('name')?.invalid && addResidenceForm.get('name')?.touched">
-        <small *ngIf="addResidenceForm.get('name')?.errors?.['required']">Name is required.</small>
-        <small *ngIf="addResidenceForm.get('name')?.errors?.['minlength']">Name must be at least 3 characters.</small>
-      </div>
+      <label for="name" class="block text-lg font-medium text-gray-700 mb-2">Nom de la Résidence</label>
+      <input
+        id="name"
+        type="text"
+        formControlName="name"
+        class="p-4 w-full border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+        placeholder="Entrez le nom de la résidence"
+      />
+      <p *ngIf="addResidenceForm.get('name')?.invalid && addResidenceForm.get('name')?.touched" class="text-red-500 text-sm mt-1">
+        <small *ngIf="addResidenceForm.get('name')?.errors?.['required']">Le nom est requis.</small>
+        <small *ngIf="addResidenceForm.get('name')?.errors?.['minlength']">Le nom doit contenir au moins 3 caractères.</small>
+      </p>
     </div>
 
+    <!-- Address Field -->
     <div>
-      <label for="address">Address</label>
-      <input type="text" id="address" formControlName="address" placeholder="Enter address">
-      <div *ngIf="addResidenceForm.get('address')?.invalid && addResidenceForm.get('address')?.touched">
-        <small *ngIf="addResidenceForm.get('address')?.errors?.['required']">Address is required.</small>
-        <small *ngIf="addResidenceForm.get('address')?.errors?.['minlength']">Address must be at least 5 characters.</small>
-      </div>
+      <label for="address" class="block text-lg font-medium text-gray-700 mb-2">Adresse</label>
+      <input
+        id="address"
+        type="text"
+        formControlName="address"
+        class="p-4 w-full border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+        placeholder="Entrez l'adresse de la résidence"
+      />
+      <p *ngIf="addResidenceForm.get('address')?.invalid && addResidenceForm.get('address')?.touched" class="text-red-500 text-sm mt-1">
+        <small *ngIf="addResidenceForm.get('address')?.errors?.['required']">L'adresse est requise.</small>
+        <small *ngIf="addResidenceForm.get('address')?.errors?.['minlength']">L'adresse doit contenir au moins 5 caractères.</small>
+      </p>
     </div>
 
+    <!-- Status Field -->
     <div>
-      <label for="status">Status</label>
-      <select id="status" formControlName="status">
+      <label for="status" class="block text-lg font-medium text-gray-700 mb-2">Statut</label>
+      <select
+        id="status"
+        formControlName="status"
+        class="p-4 w-full border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+      >
         <option value="Disponible">Disponible</option>
         <option value="En Construction">En Construction</option>
         <option value="Vendu">Vendu</option>
       </select>
     </div>
 
-    <div>
-      <label for="image">Image</label>
-      <input type="file" id="image" (change)="onFileSelected($event)" accept="image/*">
+    <!-- Submit Button -->
+    <div class="text-center">
+      <button
+        type="submit"
+        class="bg-blue-600 text-white py-3 px-6 rounded-lg hover:bg-blue-700 transition duration-200 shadow-lg disabled:opacity-50"
+        [disabled]="addResidenceForm.invalid"
+      >
+        Ajouter
+      </button>
     </div>
-
-    <div *ngIf="imagePreview">
-      <h3>Image Preview:</h3>
-      <img [src]="imagePreview" alt="Image Preview" style="max-width: 200px; max-height: 200px;">
-    </div>
-
-    <button type="submit" [disabled]="addResidenceForm.invalid">Add Residence</button>
   </form>
 </div>

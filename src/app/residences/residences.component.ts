@@ -8,21 +8,28 @@ import { Residence } from '../residence.model';
   styleUrls: ['./residences.component.css'],
 })
 export class ResidencesComponent implements OnInit {
-  listResidences: Residence[] = [];
-  favorites: Residence[] = [];
-  filterAddress = '';
-  filteredResidences: Residence[] = [];
+  listResidences: Residence[] = []; // Full list of residences
+  filteredResidences: Residence[] = []; // Filtered residences for display
+  favorites: Residence[] = []; // List of favorite residences
+  filterAddress: string = ''; // Address filter input
 
   constructor(private residenceService: ResidenceService) {}
 
-  ngOnInit() {
-    // Fetch residences from the service
-    this.listResidences = this.residenceService.getResidences();
-    this.filteredResidences = [...this.listResidences];  // Initializing the filtered list
+  ngOnInit(): void {
+    // Fetch residences and initialize filtered list
+    this.residenceService.getResidences().subscribe(
+      (data) => {
+        this.listResidences = data;
+        this.filteredResidences = [...this.listResidences];
+      },
+      (error) => {
+        console.error('Failed to fetch residences:', error);
+      }
+    );
   }
 
-  // Show residence address
-  showLocation(residence: Residence) {
+  // Show the location of a residence
+  showLocation(residence: Residence): void {
     if (residence.address === 'Inconnu') {
       alert('L’adresse de cette résidence est inconnue.');
     } else {
@@ -30,15 +37,15 @@ export class ResidencesComponent implements OnInit {
     }
   }
 
-  // Add to favorites list if not already in the list
-  addToFavorites(residence: Residence) {
+  // Add a residence to favorites if it's not already present
+  addToFavorites(residence: Residence): void {
     if (!this.favorites.some((fav) => fav.id === residence.id)) {
       this.favorites.push(residence);
     }
   }
 
-  // Filter residences based on address input
-  filterResidences() {
+  // Filter residences based on the address input
+  filterResidences(): void {
     if (this.filterAddress) {
       this.filteredResidences = this.listResidences.filter((residence) =>
         residence.address.toLowerCase().includes(this.filterAddress.toLowerCase())

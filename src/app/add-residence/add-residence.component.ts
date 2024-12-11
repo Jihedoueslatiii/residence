@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ResidenceService } from '../residence.service';
 
 @Component({
@@ -9,37 +10,26 @@ import { ResidenceService } from '../residence.service';
 })
 export class AddResidenceComponent {
   addResidenceForm: FormGroup;
-  imagePreview: string | ArrayBuffer | null = null;
 
-  constructor(private fb: FormBuilder, private residenceService: ResidenceService) {
+  constructor(
+    private fb: FormBuilder,
+    private residenceService: ResidenceService,
+    private router: Router
+  ) {
     this.addResidenceForm = this.fb.group({
       name: ['', Validators.required],
       address: ['', Validators.required],
-      status: ['', Validators.required],
+      status: ['Disponible', Validators.required],
     });
-  }
-
-  onFileSelected(event: any): void {
-    const file = event.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = () => {
-        this.imagePreview = reader.result;
-      };
-      reader.readAsDataURL(file);
-    }
   }
 
   onSubmit(): void {
     if (this.addResidenceForm.valid) {
-      const newResidence = {
-        ...this.addResidenceForm.value,
-        image: this.imagePreview || 'assets/default-image.png',
-      };
-      this.residenceService.addResidence(newResidence);
-      this.addResidenceForm.reset();
-      this.imagePreview = null;
-      alert('Residence added successfully!');
+      const newResidence = this.addResidenceForm.value;
+      this.residenceService.addResidence(newResidence).subscribe(() => {
+        alert('Résidence ajoutée avec succès !');
+        this.router.navigate(['/residences']); // Redirect to residences list
+      });
     }
   }
 }

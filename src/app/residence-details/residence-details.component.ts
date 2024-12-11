@@ -10,7 +10,6 @@ import { Residence } from '../residence.model';
 })
 export class ResidenceDetailsComponent implements OnInit {
   residence: Residence | null = null;
-  notFound: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -18,11 +17,14 @@ export class ResidenceDetailsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const residenceId = Number(this.route.snapshot.paramMap.get('id'));
-    this.residence = this.residenceService.getResidenceById(residenceId);
-
-    if (!this.residence) {
-      this.notFound = true;
-    }
+    const id = Number(this.route.snapshot.paramMap.get('id'));
+    this.residenceService.getResidenceById(id).subscribe(
+      (data) => {
+        this.residence = data;
+      },
+      (error) => {
+        console.error('Failed to fetch residence details:', error);
+      }
+    );
   }
 }

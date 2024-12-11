@@ -1,29 +1,76 @@
+/* Container for the form */
 .add-residence-form {
-    width: 300px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #f8f8f8;
-    border-radius: 10px;
+  background-color: #ffffff;
+  padding: 2rem;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+/* Heading styling */
+.add-residence-form h2 {
+  text-align: center;
+  color: #1c3d5b;
+  font-weight: 600;
+  margin-bottom: 2rem;
+}
+
+/* Styling for input fields and select dropdowns */
+.add-residence-form input,
+.add-residence-form select {
+  width: 100%;
+  padding: 1rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  font-size: 1rem;
+  margin-top: 0.5rem;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Focus states for inputs and selects */
+.add-residence-form input:focus,
+.add-residence-form select:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+}
+
+/* Error messages styling */
+.add-residence-form p {
+  font-size: 0.875rem;
+  color: #f87171;
+  margin-top: 0.25rem;
+}
+
+/* Submit button styling */
+.add-residence-form button {
+  background-color: #2563eb;
+  color: white;
+  padding: 1rem 2rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  margin-top: 1rem;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+/* Submit button hover effect */
+.add-residence-form button:hover {
+  background-color: #1d4ed8;
+  transform: scale(1.05);
+}
+
+/* Disabled button styling */
+.add-residence-form button:disabled {
+  background-color: #d1d5db;
+  cursor: not-allowed;
+}
+
+/* General styling for all small elements (like error messages) */
+.add-residence-form small {
+  color: #f87171;
+}
+
+/* Responsive padding for small screens */
+@media (max-width: 640px) {
+  .add-residence-form {
+    padding: 1rem;
   }
-  
-  .add-residence-form input, .add-residence-form select {
-    width: 100%;
-    padding: 8px;
-    margin: 10px 0;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  
-  .add-residence-form button {
-    background-color: #4CAF50;
-    color: white;
-    padding: 10px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  .add-residence-form button:disabled {
-    background-color: #ccc;
-  }
-  
+}

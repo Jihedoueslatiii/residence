@@ -1,15 +1,21 @@
-<div *ngIf="residence; else loading">
-  <h2>{{ residence.name }}</h2>
-  <p><strong>Address:</strong> {{ residence.address }}</p>
-  <p><strong>Status:</strong> {{ residence.status }}</p>
-  <img [src]="residence.image" alt="{{ residence.name }}" class="image">
+<div class="container mx-auto p-6 bg-white shadow-lg rounded-lg" *ngIf="residence; else loading">
+  <h2 class="text-3xl font-semibold mb-4 text-blue-700">{{ residence.name }}</h2>
+
+  <p class="text-lg mb-2"><strong>Adresse :</strong> {{ residence.address }}</p>
+  <p class="text-lg mb-4"><strong>Statut :</strong> {{ residence.status }}</p>
+  
+  <div class="image-container mb-4">
+    <img 
+      [src]="residence.image" 
+      alt="{{ residence.name }}" 
+      class="w-full h-64 object-cover rounded-lg shadow-md"
+    />
+  </div>
 </div>
 
+<!-- Loading template while residence is not available -->
 <ng-template #loading>
-  <p>Loading residence details...</p>
+  <div class="text-center p-6 text-gray-500">
+    <p>Chargement des détails de la résidence...</p>
+  </div>
 </ng-template>
-
-<!-- Show a message if the residence is not found -->
-<div *ngIf="notFound">
-  <p>Residence not found.</p>
-</div>
